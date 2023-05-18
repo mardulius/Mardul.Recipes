@@ -13,5 +13,10 @@ namespace Mardul.Recipes.Data.Repositories
         public RecipeIngredientRepository(DbContext dbContext) : base(dbContext)
         {
         }
+
+        public async Task AddRange(IEnumerable<RecipeIngredient> recipeIngredients)
+        {
+           await _dbContext.AddRangeAsync(recipeIngredients);
+        }
     }
 }

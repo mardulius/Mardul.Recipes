@@ -9,5 +9,6 @@ namespace Mardul.Recipes.Data.Repositories
 {
     public interface IRecipeIngredientRepository : IGenericRepository<RecipeIngredient>
     {
+        Task AddRange(IEnumerable<RecipeIngredient> recipeIngredients);
     }
 }

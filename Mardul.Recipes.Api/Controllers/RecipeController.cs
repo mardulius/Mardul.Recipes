@@ -28,5 +28,13 @@ namespace Mardul.Recipes.Api.Controllers
             return await _recipeService.GetAll();
         }
 
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> Add([FromBody] RecipeDto recipe)
+        {
+            await _recipeService.Add(recipe);
+
+            return Ok();
+        }
     }
 }

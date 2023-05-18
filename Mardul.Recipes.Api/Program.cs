@@ -1,3 +1,4 @@
+using Mardul.Recipes.Api.Services;
 using Mardul.Recipes.Api.Services.Mappings;
 using Mardul.Recipes.Data.DbContexts;
 using Mardul.Recipes.Data.Repositories;
@@ -17,10 +18,13 @@ builder.Services.AddDbContext<AppDbContext>( x =>
     x.UseSqlite(builder.Configuration.GetConnectionString("db"));
     x.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
     x.UseLazyLoadingProxies();
+    
 });
 builder.Services.AddAutoMapper(typeof(RecipeMappingProfile));
 builder.Services.AddScoped(typeof(DbContext), typeof(AppDbContext));
 builder.Services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+builder.Services.AddTransient<IRecipeService, RecipeService>();
 
 
 var app = builder.Build();
