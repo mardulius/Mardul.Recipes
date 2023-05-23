@@ -20,12 +20,9 @@ namespace Mardul.Recipes.Api.Services
         #endregion
         public async Task Add(RecipeDto recipe)
         {
-            var newRecipe = _mapper.Map<RecipeDto>(recipe);
-            List<RecipeIngredient> ingredients = new List<RecipeIngredient>();
-            foreach (var item in recipe.Ingredients)
-            {
-                ingredients.Add(_mapper.Map<RecipeIngredient>(item));
-            }
+            var newRecipe = _mapper.Map<Recipe>(recipe);
+            await _unitOfWorkService.RecipeRepository.Add(newRecipe);
+           await  _unitOfWorkService.Save();
         }
 
         public async Task<IEnumerable<RecipeDto>> GetAll()

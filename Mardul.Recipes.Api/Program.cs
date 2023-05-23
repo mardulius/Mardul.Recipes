@@ -21,8 +21,9 @@ builder.Services.AddDbContext<AppDbContext>( x =>
     
 });
 builder.Services.AddAutoMapper(typeof(RecipeMappingProfile));
-builder.Services.AddScoped(typeof(DbContext), typeof(AppDbContext));
-builder.Services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+builder.Services.AddScoped<DbContext, AppDbContext>();
+builder.Services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
+builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
 builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();
 

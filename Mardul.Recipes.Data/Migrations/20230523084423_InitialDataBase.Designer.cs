@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mardul.Recipes.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230517092202_InitialDataBase")]
+    [Migration("20230523084423_InitialDataBase")]
     partial class InitialDataBase
     {
         /// <inheritdoc />
