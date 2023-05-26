@@ -9,7 +9,7 @@ AutoMapper<br>
 XUnit
 
 -----------------------------------------------------------------
-<h2>ASP.NET Core Web API приложение Recipes с использльзованием паттернов Unit Of Work и Repository</h2>
+<h2>ASP.NET Core Web API приложение Recipes с использованием паттернов Unit Of Work и Repository</h2>
 
 Компоненты:<br>
 NET 6<br>
