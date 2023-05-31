@@ -1,0 +1,23 @@
+<p>show-recipe works!</p>
+
+
+
+
+<table class="table table-striped">
+
+  <tbody>
+    <tr *ngFor="let dataItem of RecipeList">
+      <td>{{dataItem.id}}</td>
+      <td>{{dataItem.name}}</td>
+      <td>{{dataItem.dateCreate}}</td>
+      <td>{{dataItem.description}}</td>
+      <td><tr
+        *ngFor="let ingItem of dataItem.ingredients">
+        <td>{{ingItem.id}}</td>
+        <td>{{ingItem.amount}}</td>
+        <td>{{ingItem.measureName}}</td>
+        <td>{{ingItem.ingredientName}}</td>
+      </td>
+    </tr>
+  </tbody>
+</table>
