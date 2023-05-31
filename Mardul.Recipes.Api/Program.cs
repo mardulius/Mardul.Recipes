@@ -13,13 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>( x =>
+builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlite(builder.Configuration.GetConnectionString("db"));
     x.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
     x.UseLazyLoadingProxies();
-    
+
 });
+
 builder.Services.AddAutoMapper(typeof(RecipeMappingProfile));
 builder.Services.AddScoped<DbContext, AppDbContext>();
 builder.Services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
@@ -38,7 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors( builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseAuthorization();
 
 app.MapControllers();

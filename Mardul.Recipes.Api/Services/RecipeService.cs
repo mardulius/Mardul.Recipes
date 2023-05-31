@@ -27,7 +27,9 @@ namespace Mardul.Recipes.Api.Services
 
         public async Task<IEnumerable<RecipeDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var recipes = await _unitOfWorkService.RecipeRepository.GetAll();
+
+            return _mapper.Map<IEnumerable<RecipeDto>>(recipes);
         }
 
         public async Task<RecipeDto> GetById(int id)
