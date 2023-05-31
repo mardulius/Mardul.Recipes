@@ -1,8 +1,21 @@
 <p>show-recipe works!</p>
 
+<div>
+ <div *ngFor="let dataItem of RecipeList">
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{dataItem.name}}</h5>
+      <p class="card-text">{{dataItem.description}}</p>
+      <a href="#" class="btn btn-primary">Подробнее</a>
+    </div>
+  </div>
 
+ </div>
 
+</div>
 
+<!-- 
 <table class="table table-striped">
 
   <tbody>
@@ -20,4 +33,4 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->

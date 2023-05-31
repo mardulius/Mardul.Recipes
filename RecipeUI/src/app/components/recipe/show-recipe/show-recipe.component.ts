@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IRecipe } from 'src/app/models/irecipe';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class ShowRecipeComponent implements OnInit {
 
   constructor( private service: ApiService) {}
-  RecipeList: any = [];
+  RecipeList: IRecipe[] = [];
 
   ngOnInit(): void {
     this.refreshRecipeList();
