@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Mardul.Recipes.Api/recipesDB.db-wal
+/Mardul.Recipes.Api/recipesDB.db-shm
+/Mardul.Recipes.Api/recipesDB.db
