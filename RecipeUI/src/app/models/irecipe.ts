@@ -8,5 +8,5 @@ export interface IRecipe {
     instruction: string;
     description: string;
     ingredients: IRecipeIngredient[];
-
+    
 }

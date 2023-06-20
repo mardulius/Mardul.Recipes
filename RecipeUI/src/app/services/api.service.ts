@@ -15,5 +15,10 @@ export class ApiService {
   getRecipeList(): Observable<IRecipe[]> {
     return this.http.get<IRecipe[]>(this.apiUrl + 'recipe/all');
   }
+  addRecipe(recipe: IRecipe){
+     this.http.post(this.apiUrl + 'recipe/add', recipe);
+
+  }
+
 }
 
