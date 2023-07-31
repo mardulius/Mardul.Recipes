@@ -10,6 +10,6 @@ namespace Mardul.Recipes.Data.Entities
         public string? Instruction { get; set; }
         public string? Description { get; set; }
         public virtual ICollection<RecipeIngredient>? Ingredients { get; set; }
-
+        public virtual ICollection<Category>? Categories { get; set; }
     }
 }
