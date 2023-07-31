@@ -8,6 +8,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { ShowRecipeComponent } from './components/recipe/show-recipe/show-recipe.component';
 import {ApiService} from './services/api.service'
 import { AddEditRecipeComponent } from './components/recipe/add-edit-recipe/add-edit-recipe.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [ApiService],
