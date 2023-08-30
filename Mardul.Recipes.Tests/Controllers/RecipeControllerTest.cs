@@ -10,10 +10,11 @@ namespace Mardul.Recipes.Tests.Controllers
     public class RecipeControllerTest
     {
         private IRecipeService _recipeService;
-
+        private RecipeController _recipeController;
         public RecipeControllerTest()
         {
             _recipeService = A.Fake<IRecipeService>();
+            _recipeController = new RecipeController(_recipeService);
         }
 
 
@@ -22,14 +23,25 @@ namespace Mardul.Recipes.Tests.Controllers
         {
             var recipes = A.Fake<IEnumerable<RecipeDto>>();
             A.CallTo(() => _recipeService.GetAll()).Returns(recipes);
-            
-            var controller = new RecipeController(_recipeService);
-
-            var result = await controller.GetAll();
+           
+            var result = await _recipeController.GetAll();
 
             result.Should().NotBeNull();
             result.Should().BeOfType<OkObjectResult>();
 
         }
+
+        [Fact]
+        public async Task RecipeController_Add_ReturnOk()
+        {
+            var recipe = A.Fake<RecipeDto>();
+            A.CallTo(() => _recipeService.Add(recipe)).Returns(true);
+
+            var result = await _recipeController.Add(recipe);
+
+            result.Should().NotBeNull();
+            result.Should().BeOfType<OkResult>();
+        }
+
     }
 }

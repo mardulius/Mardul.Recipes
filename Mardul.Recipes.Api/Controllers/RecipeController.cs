@@ -1,6 +1,5 @@
 ﻿using Mardul.Recipes.Api.Dto;
 using Mardul.Recipes.Api.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mardul.Recipes.Api.Controllers

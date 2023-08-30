@@ -16,7 +16,7 @@ namespace Mardul.Recipes.Data.Repositories
         public async Task Add(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
-            var recipe = entity as Recipe;
+           
         }
 
         public async Task<int> Complete()

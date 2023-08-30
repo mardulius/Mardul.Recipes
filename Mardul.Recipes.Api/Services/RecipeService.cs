@@ -18,11 +18,15 @@ namespace Mardul.Recipes.Api.Services
         }
 
         #endregion
-        public async Task Add(RecipeDto recipe)
+        public async Task<bool> Add(RecipeDto recipe)
         {
             var newRecipe = _mapper.Map<Recipe>(recipe);
+            
             await _unitOfWorkService.RecipeRepository.Add(newRecipe);
-           await  _unitOfWorkService.Save();
+            var saved = await _unitOfWorkService.Save();
+            
+            return saved > 0 ? true : false;
+
         }
 
         public async Task<IEnumerable<RecipeDto>> GetAll()
