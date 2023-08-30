@@ -23,9 +23,11 @@ namespace Mardul.Recipes.Api.Controllers
 
         [HttpGet]
         [Route("All")]
-        public async Task<IEnumerable<RecipeDto>> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return await _recipeService.GetAll();
+            var recipes =  await _recipeService.GetAll();
+            
+            return Ok(recipes);
         }
 
         [HttpPost]
