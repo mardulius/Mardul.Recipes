@@ -1,5 +1,5 @@
 ﻿
-namespace Mardul.Recipes.Api.Dto
+namespace Mardul.Recipes.Core.Dto
 {
     public class RecipeIngredientDto
     {

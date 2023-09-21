@@ -1,6 +1,6 @@
-﻿using Mardul.Recipes.Data.Entities;
+﻿using Mardul.Recipes.Core.Entities;
 
-namespace Mardul.Recipes.Data.Repositories
+namespace Mardul.Recipes.Core.Interfaces.Repositories
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {

@@ -1,8 +1,8 @@
-﻿using Mardul.Recipes.Data.Entities;
+﻿using Mardul.Recipes.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Mardul.Recipes.Data.DbContexts
+namespace Mardul.Recipes.Infrastructure.DbContexts
 {
     public class AppDbContext : DbContext
     {

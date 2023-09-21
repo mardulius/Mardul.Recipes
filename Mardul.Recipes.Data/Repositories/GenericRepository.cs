@@ -1,9 +1,8 @@
-﻿
-using Mardul.Recipes.Data.DbContexts;
-using Mardul.Recipes.Data.Entities;
+﻿using Mardul.Recipes.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Mardul.Recipes.Core.Interfaces.Repositories;
 
-namespace Mardul.Recipes.Data.Repositories
+namespace Mardul.Recipes.Infrastructure.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {

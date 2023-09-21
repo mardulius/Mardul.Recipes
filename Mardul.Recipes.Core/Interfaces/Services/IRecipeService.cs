@@ -1,7 +1,6 @@
-﻿using Mardul.Recipes.Api.Dto;
-using Mardul.Recipes.Data.Entities;
+﻿using Mardul.Recipes.Core.Dto;
 
-namespace Mardul.Recipes.Api.Services
+namespace Mardul.Recipes.Core.Interfaces.Services
 {
     public interface IRecipeService
     {

@@ -1,6 +1,6 @@
 ﻿
 
-namespace Mardul.Recipes.Data.Entities
+namespace Mardul.Recipes.Core.Entities
 {
     public class RecipeIngredient : BaseEntity
     {

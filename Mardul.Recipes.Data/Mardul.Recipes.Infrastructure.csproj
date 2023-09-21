@@ -21,4 +21,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mardul.Recipes.Core\Mardul.Recipes.Core.csproj" />
+  </ItemGroup>
+
 </Project>

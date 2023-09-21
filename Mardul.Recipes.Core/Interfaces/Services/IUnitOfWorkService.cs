@@ -1,6 +1,6 @@
-﻿using Mardul.Recipes.Data.Repositories;
+﻿
 
-namespace Mardul.Recipes.Api.Services
+namespace Mardul.Recipes.Core.Interfaces.Services
 {
     public interface IUnitOfWorkService
     {

@@ -1,12 +1,9 @@
-﻿using Mardul.Recipes.Data.Entities;
+﻿using Mardul.Recipes.Core.Entities;
+using Mardul.Recipes.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Mardul.Recipes.Data.Repositories
+
+namespace Mardul.Recipes.Infrastructure.Repositories
 {
     public class RecipeIngredientRepository : GenericRepository<RecipeIngredient>, IRecipeIngredientRepository
     {

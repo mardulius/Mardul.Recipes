@@ -1,13 +1,15 @@
 ﻿
-namespace Mardul.Recipes.Api.Dto
+
+
+namespace Mardul.Recipes.Core.Entities
 {
-    public class RecipeDto
+    public class Recipe : BaseEntity
     {
-        public int Id { get; set; }
         public string? Name { get; set; }
         public DateTime DateCreate { get; set; }
+        public DateTime DateUpdate { get; set; }
         public string? Instruction { get; set; }
         public string? Description { get; set; }
-        public  ICollection<RecipeIngredientDto>? Ingredients { get; set; }
+        public virtual ICollection<RecipeIngredient>? Ingredients { get; set; }
     }
 }

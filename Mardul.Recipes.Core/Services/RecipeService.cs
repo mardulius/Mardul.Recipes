@@ -1,9 +1,10 @@
-﻿using AutoMapper;
-using Mardul.Recipes.Api.Dto;
-using Mardul.Recipes.Data.Entities;
-using Mardul.Recipes.Data.Repositories;
+﻿using Mardul.Recipes.Core.Dto;
+using Mardul.Recipes.Core.Interfaces.Services;
+using Mardul.Recipes.Core.Entities;
+using Mardul.Recipes.Core.Interfaces.Repositories;
+using AutoMapper;
 
-namespace Mardul.Recipes.Api.Services
+namespace Mardul.Recipes.Core.Services
 {
     public class RecipeService : IRecipeService
     {

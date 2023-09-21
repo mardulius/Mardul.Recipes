@@ -1,5 +1,4 @@
-﻿using Mardul.Recipes.Data.DbContexts;
-using Mardul.Recipes.Data.Repositories;
+﻿using Mardul.Recipes.Core.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mardul.Recipes.Api.Services

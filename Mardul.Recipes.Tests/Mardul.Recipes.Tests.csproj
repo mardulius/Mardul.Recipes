@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mardul.Recipes.Api\Mardul.Recipes.Api.csproj" />
-    <ProjectReference Include="..\Mardul.Recipes.Data\Mardul.Recipes.Data.csproj" />
+    <ProjectReference Include="..\Mardul.Recipes.Data\Mardul.Recipes.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

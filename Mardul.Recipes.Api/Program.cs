@@ -1,8 +1,10 @@
 using Mardul.Recipes.Api.Services;
-using Mardul.Recipes.Api.Services.Mappings;
-using Mardul.Recipes.Data.DbContexts;
-using Mardul.Recipes.Data.Repositories;
+using Mardul.Recipes.Core.Interfaces.Services;
+using Mardul.Recipes.Core.Interfaces.Repositories;
+using Mardul.Recipes.Infrastructure.DbContexts;
+using Mardul.Recipes.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Mardul.Recipes.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

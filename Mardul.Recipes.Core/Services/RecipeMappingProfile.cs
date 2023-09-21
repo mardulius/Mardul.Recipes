@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Mardul.Recipes.Api.Dto;
-using Mardul.Recipes.Data.Entities;
+using Mardul.Recipes.Core.Dto;
+using Mardul.Recipes.Core.Entities;
 
-namespace Mardul.Recipes.Api.Services.Mappings
+namespace Mardul.Recipes.Core.Services
 {
     public class RecipeMappingProfile : Profile
     {
