@@ -1,8 +1,8 @@
 ﻿using FakeItEasy;
 using FluentAssertions;
 using Mardul.Recipes.Api.Controllers;
-using Mardul.Recipes.Api.Dto;
-using Mardul.Recipes.Api.Services;
+using Mardul.Recipes.Core.Dto;
+using Mardul.Recipes.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mardul.Recipes.Tests.Controllers
