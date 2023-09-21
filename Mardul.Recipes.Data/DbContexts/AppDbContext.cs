@@ -10,7 +10,6 @@ namespace Mardul.Recipes.Data.DbContexts
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Measure> Measures { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -28,15 +27,6 @@ namespace Mardul.Recipes.Data.DbContexts
                     new Measure { Id = 4, Name = "гр." },
                     new Measure { Id = 5, Name = "л." },
                     new Measure { Id = 6, Name = "мл." }
-                });
-
-            modelBuilder.Entity<Category>().HasData(
-                new Category[]
-                {
-                    new Category { Id = 1, Name = "Завтрак" },
-                    new Category { Id = 2, Name = "Обед" },
-                    new Category { Id = 3, Name = "Ужин" },
-                    new Category { Id = 4, Name = "Закуски" }
                 });
         }
 

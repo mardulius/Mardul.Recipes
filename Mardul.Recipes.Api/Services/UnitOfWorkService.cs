@@ -7,16 +7,12 @@ namespace Mardul.Recipes.Api.Services
     public class UnitOfWorkService : IUnitOfWorkService
     {
         private readonly DbContext _dbContext;
-        public IRecipeRepository RecipeRepository { get; set; }
-        public IRecipeIngredientRepository RecipeIngredientRepository { get; set; }
-
-        public UnitOfWorkService(DbContext dbContext, IRecipeRepository recipeRepository, IRecipeIngredientRepository recipeIngredientRepository)
+       
+        public UnitOfWorkService(DbContext dbContext)
         {
             _dbContext = dbContext;
-            RecipeRepository = recipeRepository;
-            RecipeIngredientRepository = recipeIngredientRepository;
         }
-        public async Task<int> Save()
+        public async Task<int> SaveChangesAsync()
         {
             return await _dbContext.SaveChangesAsync();
         }

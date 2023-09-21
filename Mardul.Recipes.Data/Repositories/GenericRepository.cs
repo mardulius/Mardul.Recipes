@@ -18,12 +18,6 @@ namespace Mardul.Recipes.Data.Repositories
             await _dbContext.Set<T>().AddAsync(entity);
            
         }
-
-        public async Task<int> Complete()
-        {
-            return await _dbContext.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _dbContext.Set<T>().ToListAsync();

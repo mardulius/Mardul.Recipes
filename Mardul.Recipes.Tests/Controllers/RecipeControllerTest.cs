@@ -11,6 +11,7 @@ namespace Mardul.Recipes.Tests.Controllers
     {
         private IRecipeService _recipeService;
         private RecipeController _recipeController;
+
         public RecipeControllerTest()
         {
             _recipeService = A.Fake<IRecipeService>();

@@ -8,6 +8,5 @@ namespace Mardul.Recipes.Data.Repositories
             Task<T> GetById(int id);
             Task Remove(T entity);
             Task<IEnumerable<T>> GetAll();
-            Task<int> Complete();
     }
 }
