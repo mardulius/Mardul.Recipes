@@ -35,7 +35,7 @@ namespace Mardul.Recipes.Tests.Controllers
         [Fact]
         public async Task RecipeController_Add_ReturnOk()
         {
-            var recipe = A.Fake<RecipeDto>();
+            var recipe = A.Fake<CreateRecipeDto>();
             A.CallTo(() => _recipeService.Add(recipe)).Returns(true);
 
             var result = await _recipeController.Add(recipe);

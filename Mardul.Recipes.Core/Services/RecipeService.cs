@@ -23,7 +23,7 @@ namespace Mardul.Recipes.Core.Services
 
         #endregion
 
-        public async Task<bool> Add(RecipeDto recipe)
+        public async Task<bool> Add(CreateRecipeDto recipe)
         {
             var newRecipe = _mapper.Map<Recipe>(recipe);
             
