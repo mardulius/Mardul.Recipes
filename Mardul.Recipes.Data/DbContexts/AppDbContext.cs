@@ -28,6 +28,15 @@ namespace Mardul.Recipes.Infrastructure.DbContexts
                     new Measure { Id = 5, Name = "л." },
                     new Measure { Id = 6, Name = "мл." }
                 });
+
+            modelBuilder.Entity<Ingredient>().HasData(
+                new Ingredient[]
+                {
+                    new Ingredient { Id = 1, Name = "Молоко"},
+                    new Ingredient { Id = 2, Name = "Мука"},
+                    new Ingredient { Id = 3, Name = "Вода"},
+                    new Ingredient { Id = 4, Name = "Соль"},
+                });
         }
 
     }

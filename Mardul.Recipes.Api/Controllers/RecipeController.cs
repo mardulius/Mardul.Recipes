@@ -24,8 +24,8 @@ namespace Mardul.Recipes.Api.Controllers
         [Route("All")]
         public async Task<IActionResult> GetAll()
         {
-            var recipes =  await _recipeService.GetAll();
-            
+            var recipes = await _recipeService.GetAll();
+
             return Ok(recipes);
         }
 
@@ -36,6 +36,14 @@ namespace Mardul.Recipes.Api.Controllers
             await _recipeService.Add(recipe);
 
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetById([FromQuery] int id)
+        {
+            var recipe = await _recipeService.GetById(id);
+
+            return Ok(recipe);
         }
     }
 }

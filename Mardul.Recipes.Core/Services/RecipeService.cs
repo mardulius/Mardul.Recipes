@@ -43,7 +43,9 @@ namespace Mardul.Recipes.Core.Services
 
         public async Task<RecipeDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            var recipe = await _recipeRepository.GetById(id);
+
+            return _mapper.Map<RecipeDto>(recipe);
         }
     }
 }
