@@ -29,9 +29,31 @@ namespace Mardul.Recipes.Core.Services
 
         #endregion
 
-        public Task<bool> Login(LoginRequestDto request)
+        public async Task<bool> Login(LoginRequestDto request)
         {
-            //var token = _tokenService.Generate(user);
+            var user = await _userRepository.GetByEmail(request.Email);
+
+            if (user != null)
+            {
+                var result = _passwordHashService.Validate(request.Password, user.Password);
+
+                if (result)
+                {
+                    var token = _tokenService.Generate(user);
+                    user.Token = token;
+                    user.DateUpdate = DateTime.UtcNow;
+                    
+                    _userRepository.Update(user);
+
+                    _unitOfWorkService.SaveChangesAsync();
+
+                    return result;
+                }
+
+                return result;
+            }
+
+            
             throw new NotImplementedException();
         }
 

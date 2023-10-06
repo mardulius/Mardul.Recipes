@@ -31,6 +31,11 @@ namespace Mardul.Recipes.Infrastructure.Repositories
         {
             _dbContext.Set<T>().Remove(entity);
         }
+
+        public async Task Update(T entity)
+        {
+            _dbContext.Update(entity);
+        }
     }
 
 

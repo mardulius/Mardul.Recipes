@@ -9,5 +9,10 @@ namespace Mardul.Recipes.Infrastructure.Repositories
         public UserRepository(DbContext dbContext) : base(dbContext)
         {
         }
+
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _dbContext.Set<User>().FirstOrDefaultAsync(x => x.Email == email);
+        }
     }
 }
