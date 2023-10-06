@@ -1,29 +1,13 @@
 ﻿using Mardul.Recipes.Core.Entities;
 using Mardul.Recipes.Core.Interfaces.Repositories;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Mardul.Recipes.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public Task Add(User entity)
+        public UserRepository(DbContext dbContext) : base(dbContext)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<User>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Remove(User entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

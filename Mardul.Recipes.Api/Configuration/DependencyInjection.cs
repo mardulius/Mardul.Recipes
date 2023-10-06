@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Mardul.Recipes.Api.Configuration
 {
@@ -31,6 +32,9 @@ namespace Mardul.Recipes.Api.Configuration
 
             services.AddAutoMapper(typeof(RecipeMappingProfile));
             services.AddAutoMapper(typeof(UserMappingProfile));
+
+            var section = configuration.GetSection("PasswordHashOptions");
+            services.Configure<PasswordHashOptions>(section);
 
             services.AddCustomServices();
             services.AddRepositories();
@@ -73,6 +77,7 @@ namespace Mardul.Recipes.Api.Configuration
             services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
             services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPasswordHashService, PasswordHashService>();
 
             return services;
         }
@@ -81,7 +86,7 @@ namespace Mardul.Recipes.Api.Configuration
             services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
             services.AddTransient<IRecipeRepository, RecipeRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-
+           
             return services;
         }
     }

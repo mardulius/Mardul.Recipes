@@ -12,12 +12,11 @@ namespace Mardul.Recipes.Core.Entities
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+        public string? Token { get; set; }
         [Required]
-        public string Token { get; set; }
+        public DateTime DateCreate { get; set; } = DateTime.UtcNow;
         [Required]
-        public DateTime DateCreate { get; set; }
-        [Required]
-        public DateTime DateUpdate { get; set; }
+        public DateTime DateUpdate { get; set; } = DateTime.UtcNow;
 
     }
 }

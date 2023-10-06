@@ -1,7 +1,5 @@
 ﻿using Mardul.Recipes.Core.Dto.Accounts;
-using Mardul.Recipes.Core.Entities;
 using Mardul.Recipes.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mardul.Recipes.Api.Controllers
@@ -26,15 +24,19 @@ namespace Mardul.Recipes.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("register")]
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                await _userService.Register(request);
+                var result = await _userService.Register(request);
+                if (result)
+                {
+                    return Ok();
+                }
             }
-
-            return Ok();
+            return BadRequest();
         }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace Mardul.Recipes.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("login")]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {

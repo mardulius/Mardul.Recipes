@@ -5,7 +5,7 @@ namespace Mardul.Recipes.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        Task Login(LoginRequestDto request);
-        Task Register(RegisterRequestDto request);
+        Task<bool> Login(LoginRequestDto request);
+        Task<bool> Register(RegisterRequestDto request);
     }
 }
