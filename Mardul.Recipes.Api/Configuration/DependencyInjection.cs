@@ -18,7 +18,7 @@ namespace Mardul.Recipes.Api.Configuration
 
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuth(configuration);
+            services.AddCustomAuthentication(configuration);
 
             services.AddDbContext<AppDbContext>(x =>
             {
@@ -27,20 +27,16 @@ namespace Mardul.Recipes.Api.Configuration
                 x.UseLazyLoadingProxies();
 
             });
-
+            services.AddScoped<DbContext, AppDbContext>();
             services.AddAutoMapper(typeof(RecipeMappingProfile));
 
-            services.AddScoped<DbContext, AppDbContext>();
-
-            services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
-            services.AddTransient<IRecipeRepository, RecipeRepository>();
-            services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
-            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddCustomServices();
+            services.AddRepositories();
 
             return services;
         }
 
-        public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtOptions = new JwtOptions();
             var section = configuration.GetSection("JwtOptions");
@@ -65,6 +61,24 @@ namespace Mardul.Recipes.Api.Configuration
                         Encoding.UTF8.GetBytes(jwtOptions.Key)),
                 };
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomServices(this IServiceCollection services)
+        {
+
+            services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddTransient<IUserService, UserService>();
+
+            return services;
+        }
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
+            services.AddTransient<IRecipeRepository, RecipeRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             return services;
         }
