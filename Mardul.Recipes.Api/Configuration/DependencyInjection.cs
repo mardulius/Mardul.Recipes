@@ -28,7 +28,9 @@ namespace Mardul.Recipes.Api.Configuration
 
             });
             services.AddScoped<DbContext, AppDbContext>();
+
             services.AddAutoMapper(typeof(RecipeMappingProfile));
+            services.AddAutoMapper(typeof(UserMappingProfile));
 
             services.AddCustomServices();
             services.AddRepositories();

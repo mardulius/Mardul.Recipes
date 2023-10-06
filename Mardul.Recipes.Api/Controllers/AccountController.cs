@@ -13,36 +13,41 @@ namespace Mardul.Recipes.Api.Controllers
 
         #region DI
 
-        private readonly ITokenService _tokenService;
         private readonly IUserService _userService;
-        public AccountController(ITokenService tokenService, IUserService userService)
+        public AccountController(IUserService userService)
         {
-            _tokenService = tokenService;
             _userService = userService;
         }
 
         #endregion
 
+        /// <summary>
+        /// register new user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterRequestDto)
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
-
             if (!ModelState.IsValid)
             {
-
+                await _userService.Register(request);
             }
+
+            return Ok();
         }
-        
-        
-        
+
+        /// <summary>
+        /// Login user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] string email)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            var user = new User { Email = email };
+            await _userService.Login(request);
 
-            var token = _tokenService.Generate(user);
-
-            return Ok(token);
+            return Ok();
         }
     }
 }
