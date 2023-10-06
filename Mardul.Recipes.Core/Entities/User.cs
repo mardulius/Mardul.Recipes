@@ -17,7 +17,7 @@ namespace Mardul.Recipes.Core.Entities
         [Required]
         public DateTime DateCreate { get; set; }
         [Required]
-        public DateTime DateChange { get; set; }
+        public DateTime DateUpdate { get; set; }
 
     }
 }
