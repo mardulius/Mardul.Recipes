@@ -9,6 +9,7 @@ using Mardul.Recipes.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using static System.Collections.Specialized.BitVector32;
 
@@ -19,6 +20,34 @@ namespace Mardul.Recipes.Api.Configuration
 
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Description = "Enter the Bearer Authorization string as following: `Bearer Generated-JWT-Token`",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                            Reference = new OpenApiReference
+                            {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        new List<string>()
+                    }
+                });
+            });
+
             services.AddCustomAuthentication(configuration);
 
             services.AddDbContext<AppDbContext>(x =>
@@ -47,10 +76,10 @@ namespace Mardul.Recipes.Api.Configuration
             var jwtOptions = new JwtOptions();
             var section = configuration.GetSection("JwtOptions");
             section.Bind(jwtOptions);
-            
+
             services.Configure<JwtOptions>(section);
 
-            services.AddSingleton<ITokenService,TokenService>();
+            services.AddSingleton<ITokenService, TokenService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -86,7 +115,7 @@ namespace Mardul.Recipes.Api.Configuration
             services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
             services.AddTransient<IRecipeRepository, RecipeRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-           
+
             return services;
         }
     }
