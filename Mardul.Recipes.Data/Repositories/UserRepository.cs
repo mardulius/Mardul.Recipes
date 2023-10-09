@@ -14,5 +14,10 @@ namespace Mardul.Recipes.Infrastructure.Repositories
         {
             return await _dbContext.Set<User>().FirstOrDefaultAsync(x => x.Email == email);
         }
+
+        public async Task<User> GetByNickName(string? name)
+        {
+            return await _dbContext.Set<User>().FirstOrDefaultAsync(x => x.NickName == name);
+        }
     }
 }

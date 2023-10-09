@@ -21,7 +21,8 @@ namespace Mardul.Recipes.Infrastructure.Services
         {
             var claims = new Claim[] 
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.NickName),
             };
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(
@@ -49,6 +50,26 @@ namespace Mardul.Recipes.Infrastructure.Services
                 rng.GetBytes(randomNumber);
                 return Convert.ToBase64String(randomNumber);
             }
+        }
+
+        public ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key)),
+                ValidateLifetime = false
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(accessToken, tokenValidationParameters, out SecurityToken securityToken);
+            if (securityToken is not JwtSecurityToken jwtSecurityToken || 
+                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+             
+            return principal;
         }
     }
 }

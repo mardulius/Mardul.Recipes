@@ -28,9 +28,19 @@ namespace Mardul.Recipes.Core.Services
             _unitOfWorkService = unitOfWorkService;
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _userRepository.GetByEmail(email);
+        }
+
+        public async Task<User> GetByNickName(string? name)
+        {
+            return await _userRepository.GetByNickName(name);
+        }
+
         #endregion
 
-        public async Task<TokenResponseDto> Login(LoginRequestDto request)
+        public async Task<TokenDto> Login(LoginRequestDto request)
         {
             var user = await _userRepository.GetByEmail(request.Email);
 
@@ -49,7 +59,7 @@ namespace Mardul.Recipes.Core.Services
 
                     await _unitOfWorkService.SaveChangesAsync();
 
-                    return new TokenResponseDto(token, user.RefreshToken);
+                    return new TokenDto(token, user.RefreshToken);
                 }
             }
             return null;
@@ -65,6 +75,11 @@ namespace Mardul.Recipes.Core.Services
             await _unitOfWorkService.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task Update(User user)
+        {
+            await _userRepository.Update(user);
         }
     }
 }

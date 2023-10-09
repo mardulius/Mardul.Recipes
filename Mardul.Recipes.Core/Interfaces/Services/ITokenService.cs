@@ -1,5 +1,5 @@
 ﻿using Mardul.Recipes.Core.Entities;
-
+using System.Security.Claims;
 
 namespace Mardul.Recipes.Core.Interfaces.Services
 {
@@ -7,5 +7,6 @@ namespace Mardul.Recipes.Core.Interfaces.Services
     {
         string Generate(User user);
         string GenerateRefreshToken();
+        ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken);
     }
 }
