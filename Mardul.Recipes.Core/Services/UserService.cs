@@ -57,7 +57,7 @@ namespace Mardul.Recipes.Core.Services
                         new Claim(ClaimTypes.Email, user.Email)
             };
 
-                    var token = _tokenService.Generate(user);
+                    var token = _tokenService.Generate(claims);
                     user.RefreshToken = _tokenService.GenerateRefreshToken();
                     user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
                     user.DateUpdate = DateTime.UtcNow;

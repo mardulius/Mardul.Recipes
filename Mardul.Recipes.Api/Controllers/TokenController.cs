@@ -38,7 +38,8 @@ namespace Mardul.Recipes.Api.Controllers
             if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 return BadRequest();
 
-            var newAccessToken = _tokenService.Generate(user);
+            var userClaims = principal.Claims.ToArray();
+            var newAccessToken = _tokenService.Generate(userClaims);
             var newRefreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = newRefreshToken;
 
