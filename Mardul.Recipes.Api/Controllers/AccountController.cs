@@ -48,9 +48,9 @@ namespace Mardul.Recipes.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            await _userService.Login(request);
+            var result = await _userService.Login(request);
 
-            return Ok();
+            return Ok(result);
         }
     }
 }
