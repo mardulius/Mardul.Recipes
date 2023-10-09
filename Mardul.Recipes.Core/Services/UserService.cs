@@ -4,6 +4,7 @@ using Mardul.Recipes.Core.Dto.Accounts;
 using Mardul.Recipes.Core.Entities;
 using Mardul.Recipes.Core.Interfaces.Repositories;
 using Mardul.Recipes.Core.Interfaces.Services;
+using System.Security.Claims;
 
 namespace Mardul.Recipes.Core.Services
 {
@@ -50,6 +51,12 @@ namespace Mardul.Recipes.Core.Services
 
                 if (result is true)
                 {
+                    var claims = new Claim[]
+                    {
+                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.Email, user.Email)
+            };
+
                     var token = _tokenService.Generate(user);
                     user.RefreshToken = _tokenService.GenerateRefreshToken();
                     user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);

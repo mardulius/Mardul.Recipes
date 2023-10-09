@@ -5,7 +5,7 @@ namespace Mardul.Recipes.Core.Interfaces.Services
 {
     public interface ITokenService
     {
-        string Generate(User user);
+        string Generate(Claim[] userClaims);
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken);
     }

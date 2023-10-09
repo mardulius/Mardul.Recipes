@@ -17,22 +17,16 @@ namespace Mardul.Recipes.Infrastructure.Services
         {
             _jwtOptions = jwtOptions.Value;
         }
-        public string Generate(User user)
+        public string Generate(Claim[] userClaims)
         {
-            var claims = new Claim[] 
-            {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.NickName),
-            };
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(_jwtOptions.Key)), SecurityAlgorithms.HmacSha256);
 
-
             var token = new JwtSecurityToken(
                 _jwtOptions.Issuer,
                 _jwtOptions.Audience,
-                claims,
+                userClaims,
                 null,
                 DateTime.UtcNow.AddMinutes(_jwtOptions.AccessTokenLifeTimeSeconds),
                 credentials);

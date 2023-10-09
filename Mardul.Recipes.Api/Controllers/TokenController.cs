@@ -33,7 +33,7 @@ namespace Mardul.Recipes.Api.Controllers
             var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
 
             var name = principal.Identity.Name;
-            User user = await _userService.GetByNickName(name);
+            User user = await _userService.GetByEmail(name);
 
             if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 return BadRequest();
