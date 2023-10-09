@@ -12,7 +12,7 @@ namespace Mardul.Recipes.Tests.Services
         private readonly PasswordHashService _passwordHashService;
         private readonly IOptions<PasswordHashOptions> _options;
         public const string _password = "Qwerty123!";
-        public const string _hashPassword = "0qcVx8uFFSm1VMlrFfYd0g==;lINnHFdzZYWdKcn9cCgnIfwSgh8UmPj9fF6UmDjY1Pk=";
+        public const string _passwordHash = "0qcVx8uFFSm1VMlrFfYd0g==;lINnHFdzZYWdKcn9cCgnIfwSgh8UmPj9fF6UmDjY1Pk=";
         public PasswordHashServiceTest()
         {
             _options = Options.Create(new PasswordHashOptions 
@@ -25,23 +25,21 @@ namespace Mardul.Recipes.Tests.Services
             _passwordHashService = new PasswordHashService(_options);
         }
 
-        [Theory]
-        [InlineData(_password)]
-        public async Task PasswordHashService_Generate_returnToken(string password)
+        [Fact]
+        public async Task PasswordHashService_Generate_returnToken()
         {
-            var result = _passwordHashService.Generate(password);
+            var result = _passwordHashService.Generate(_password);
 
             result.Should().NotBeNull();
             result.Should().BeOfType<string>();
             result.Should().ContainAny(";");
         }
 
-        [Theory]
-        [InlineData(_password, _hashPassword)]
-        public async Task PasswordHashService_Validate_returnTrue(string password, string passwordHash)
+        [Fact]
+        public async Task PasswordHashService_Validate_returnTrue()
         {
 
-            var result = _passwordHashService.Validate(password, passwordHash);
+            var result = _passwordHashService.Validate(_password, _passwordHash);
 
             result.Should().BeTrue();
 
