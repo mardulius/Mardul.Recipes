@@ -87,6 +87,7 @@ namespace Mardul.Recipes.Core.Services
         public async Task Update(User user)
         {
             await _userRepository.Update(user);
+            await _unitOfWorkService.SaveChangesAsync();
         }
     }
 }
