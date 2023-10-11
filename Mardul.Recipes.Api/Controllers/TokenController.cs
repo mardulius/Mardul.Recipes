@@ -1,6 +1,8 @@
 ﻿using Mardul.Recipes.Core.Dto;
 using Mardul.Recipes.Core.Entities;
 using Mardul.Recipes.Core.Interfaces.Services;
+using Mardul.Recipes.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,8 +34,8 @@ namespace Mardul.Recipes.Api.Controllers
             string refreshToken = token.RefreshToken;
             var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
 
-            var name = principal.Identity.Name;
-            User user = await _userService.GetByEmail(name);
+            var userEmail = principal.Identity.Name;
+            User user = await _userService.GetByEmail(userEmail);
 
             if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 return BadRequest();
@@ -48,6 +50,19 @@ namespace Mardul.Recipes.Api.Controllers
             return Ok(new TokenDto(newAccessToken, newRefreshToken));
         }
 
+        [HttpPost, Authorize]
+        [Route("revoke")]
+        public async Task<IActionResult> Revoke()
+        {
+            var userEmail = User.Identity.Name;
+            var user = await _userService.GetByEmail(userEmail);
+            if (user == null) return BadRequest();
+
+            user.RefreshToken = null;
+            _userService.Update(user);
+
+            return NoContent();
+        }
 
     }
 }
