@@ -61,7 +61,7 @@ namespace Mardul.Recipes.Api.Controllers
             user.RefreshToken = null;
             _userService.Update(user);
 
-            return NoContent();
+            return Ok("Токен отозван");
         }
 
     }
