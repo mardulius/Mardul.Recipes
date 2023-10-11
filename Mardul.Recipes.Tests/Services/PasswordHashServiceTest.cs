@@ -26,7 +26,7 @@ namespace Mardul.Recipes.Tests.Services
         }
 
         [Fact]
-        public async Task PasswordHashService_Generate_returnToken()
+        public async Task PasswordHashService_Generate_ReturnToken()
         {
             var result = _passwordHashService.Generate(_password);
 
@@ -36,7 +36,7 @@ namespace Mardul.Recipes.Tests.Services
         }
 
         [Fact]
-        public async Task PasswordHashService_Validate_returnTrue()
+        public async Task PasswordHashService_Validate_ReturnTrue()
         {
 
             var result = _passwordHashService.Validate(_password, _passwordHash);

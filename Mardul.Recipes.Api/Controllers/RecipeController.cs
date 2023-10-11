@@ -1,5 +1,6 @@
 ﻿using Mardul.Recipes.Core.Dto;
 using Mardul.Recipes.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mardul.Recipes.Api.Controllers
@@ -19,7 +20,7 @@ namespace Mardul.Recipes.Api.Controllers
 
         #endregion
 
-
+        [Authorize]
         [HttpGet]
         [Route("All")]
         public async Task<IActionResult> GetAll()
@@ -29,6 +30,7 @@ namespace Mardul.Recipes.Api.Controllers
             return Ok(recipes);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> Add([FromBody] CreateRecipeDto recipe)
@@ -37,7 +39,8 @@ namespace Mardul.Recipes.Api.Controllers
 
             return Ok();
         }
-
+        
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] int id)
         {

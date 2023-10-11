@@ -90,8 +90,8 @@ namespace Mardul.Recipes.Api.Configuration
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidAudience = jwtOptions.Issuer,
-                    ValidIssuer = jwtOptions.Audience,
+                    ValidIssuer = jwtOptions.Issuer,
+                    ValidAudience = jwtOptions.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(jwtOptions.Key)),
                 };
