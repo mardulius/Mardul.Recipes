@@ -1,9 +1,7 @@
 ﻿using Mardul.Recipes.Core.Dto;
 using Mardul.Recipes.Core.Entities;
 using Mardul.Recipes.Core.Interfaces.Services;
-using Mardul.Recipes.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mardul.Recipes.Api.Controllers
