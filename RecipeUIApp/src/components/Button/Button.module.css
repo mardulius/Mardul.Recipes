@@ -1,0 +1,15 @@
+.button {
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.25s;
+    border: none;
+    color: var(--white-color);
+    border-radius: 29px;
+  }
+  .accent {
+    background: var(--primary-color);
+  }
+
+  .accent:hover {
+    background: var(--primary-hover-color);
+  }

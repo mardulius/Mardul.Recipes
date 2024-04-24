@@ -1,0 +1,5 @@
+.header {
+    background-color: var(--white-color);
+    min-height: 50px;
+	margin: auto;
+}

@@ -20,7 +20,7 @@ namespace Mardul.Recipes.Api.Controllers
 
         #endregion
 
-        [Authorize]
+        
         [HttpGet]
         [Route("All")]
         public async Task<IActionResult> GetAll()

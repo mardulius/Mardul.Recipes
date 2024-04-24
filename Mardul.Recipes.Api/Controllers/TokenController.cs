@@ -52,12 +52,12 @@ namespace Mardul.Recipes.Api.Controllers
         [Route("revoke")]
         public async Task<IActionResult> Revoke()
         {
-            var userEmail = User.Identity.Name;
+            var userEmail = User.Identity.Name!;
             var user = await _userService.GetByEmail(userEmail);
             if (user == null) return BadRequest();
 
             user.RefreshToken = null;
-            _userService.Update(user);
+            await _userService.Update(user);
 
             return Ok("Токен отозван");
         }
