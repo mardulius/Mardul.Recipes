@@ -30,7 +30,7 @@ namespace Mardul.Recipes.Core.Services
             await _recipeRepository.Add(newRecipe);
             var saved = await _unitOfWorkService.SaveChangesAsync();
             
-            return saved > 0 ? true : false;
+            return saved > 0;
 
         }
 

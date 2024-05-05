@@ -1,14 +1,5 @@
 ﻿
 namespace Mardul.Recipes.Core.Dto
 {
-    public class RecipeIngredientDto
-    {
-        public int Id { get; set; }
-        public int Amount { get; set; }
-        public int MeasureId { get; set; }
-        public string? MeasureName { get; set; }
-        public int IngredientId { get; set; }
-        public string? IngredientName { get; set; }
-
-    }
+    public record RecipeIngredientDto(int Id, int Amount, int MeasureId, string? MeasureName, int IngredientId, string? IngredientName);
 }
