@@ -102,7 +102,7 @@ namespace Mardul.Recipes.Api.Configuration
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
 
-            services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+            services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             services.AddTransient<IRecipeService, RecipeService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPasswordHashService, PasswordHashService>();
@@ -111,9 +111,9 @@ namespace Mardul.Recipes.Api.Configuration
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddTransient<IRecipeIngredientRepository, RecipeIngredientRepository>();
-            services.AddTransient<IRecipeRepository, RecipeRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
