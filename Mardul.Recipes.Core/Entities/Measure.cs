@@ -6,5 +6,6 @@ namespace Mardul.Recipes.Core.Entities
     public class Measure : BaseEntity
     {
         public string? Name { get; set; }
+        public virtual ICollection<RecipeIngredient>? RecipeIngridients { get; set; }
     }
 }
