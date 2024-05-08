@@ -7,10 +7,10 @@ namespace Mardul.Recipes.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<User> GetByEmail(string value);
-        Task<User> GetByNickName(string? name);
+        Task<UserEntity> GetByEmail(string value);
+        Task<UserEntity> GetByNickName(string? name);
         Task<TokenDto> Login(LoginRequestDto request);
         Task<bool> Register(RegisterRequestDto request);
-        Task Update(User user);
+        Task Update(UserEntity user);
     }
 }

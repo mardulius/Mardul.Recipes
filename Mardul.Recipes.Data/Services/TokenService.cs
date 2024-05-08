@@ -1,5 +1,4 @@
-﻿using Mardul.Recipes.Core.Entities;
-using Mardul.Recipes.Core.Interfaces.Services;
+﻿using Mardul.Recipes.Core.Interfaces.Services;
 using Mardul.Recipes.Infrastructure.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

@@ -29,12 +29,12 @@ namespace Mardul.Recipes.Core.Services
             _unitOfWorkService = unitOfWorkService;
         }
 
-        public async Task<User> GetByEmail(string email)
+        public async Task<UserEntity> GetByEmail(string email)
         {
             return await _userRepository.GetByEmail(email);
         }
 
-        public async Task<User> GetByNickName(string? name)
+        public async Task<UserEntity> GetByNickName(string? name)
         {
             return await _userRepository.GetByNickName(name);
         }
@@ -55,12 +55,12 @@ namespace Mardul.Recipes.Core.Services
                     {
                         new Claim(ClaimTypes.Name, user.Email),
                         new Claim(ClaimTypes.Email, user.Email)
-            };
+                    };
 
                     var token = _tokenService.Generate(claims);
                     user.RefreshToken = _tokenService.GenerateRefreshToken();
                     user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-                    user.DateUpdate = DateTime.UtcNow;
+                    user.Updated = DateTime.UtcNow;
 
                     await _userRepository.Update(user);
 
@@ -74,7 +74,7 @@ namespace Mardul.Recipes.Core.Services
 
         public async Task<bool> Register(RegisterRequestDto request)
         {
-            var createUser = _mapper.Map<User>(request);
+            var createUser = _mapper.Map<UserEntity>(request);
 
             createUser.Password = _passwordHashService.Generate(request.Password);
 
@@ -84,7 +84,7 @@ namespace Mardul.Recipes.Core.Services
             return true;
         }
 
-        public async Task Update(User user)
+        public async Task Update(UserEntity user)
         {
             await _userRepository.Update(user);
             await _unitOfWorkService.SaveChangesAsync();

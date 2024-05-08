@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mardul.Recipes.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mardul.Recipes.Tests", "Mardul.Recipes.Tests\Mardul.Recipes.Tests.csproj", "{C14DD63A-6ECF-456D-8848-D059C4B5C511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mardul.Recipes.Core", "Mardul.Recipes.Core\Mardul.Recipes.Core.csproj", "{624DFA6B-997F-45F0-A30B-28B1B4191370}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mardul.Recipes.Core", "Mardul.Recipes.Core\Mardul.Recipes.Core.csproj", "{624DFA6B-997F-45F0-A30B-28B1B4191370}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AAF0FA6C-173E-45DA-BFDB-8F0C7D523C72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

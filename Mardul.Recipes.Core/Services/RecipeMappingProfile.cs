@@ -8,10 +8,10 @@ namespace Mardul.Recipes.Core.Services
     {
         public RecipeMappingProfile()
         {
-            CreateMap<RecipeDto, Recipe>().ReverseMap();
-            CreateMap<RecipeIngredientDto, RecipeIngredient>().ReverseMap();
-            CreateMap<CreateRecipeDto, Recipe>();
-            CreateMap<CreateRecipeIngredientDto, RecipeIngredient>();
+            CreateMap<RecipeDto, RecipeEntity>().ReverseMap();
+            CreateMap<RecipeIngredientDto, RecipeIngredientEntity>().ReverseMap();
+            CreateMap<CreateRecipeDto, RecipeEntity>();
+            CreateMap<CreateRecipeIngredientDto, RecipeIngredientEntity>();
         }
     }
 }

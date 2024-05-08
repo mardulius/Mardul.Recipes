@@ -21,13 +21,14 @@ namespace Mardul.Recipes.Infrastructure.Migrations
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.Ingredient", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.IngredientEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -57,13 +58,14 @@ namespace Mardul.Recipes.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.Measure", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.MeasureEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -103,7 +105,44 @@ namespace Mardul.Recipes.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.Recipe", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.PermissionEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PermissionEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Read"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Create"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Update"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Delete"
+                        });
+                });
+
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RecipeEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +170,7 @@ namespace Mardul.Recipes.Infrastructure.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RecipeIngredient", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RecipeIngredientEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -157,19 +196,85 @@ namespace Mardul.Recipes.Infrastructure.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeIngredient");
+                    b.ToTable("RecipeIngredientEntity");
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.User", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RoleEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateCreate")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateUpdate")
+                    b.HasKey("Id");
+
+                    b.ToTable("RoleEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RolePermissionEntity", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolePermissionEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 1
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 2
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 3
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 4
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 1
+                        });
+                });
+
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.UserEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -196,26 +301,44 @@ namespace Mardul.Recipes.Infrastructure.Migrations
                     b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RecipeIngredient", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.UserRole", b =>
                 {
-                    b.HasOne("Mardul.Recipes.Core.Entities.Ingredient", "Ingredient")
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRole");
+                });
+
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RecipeIngredientEntity", b =>
+                {
+                    b.HasOne("Mardul.Recipes.Core.Entities.IngredientEntity", "Ingredient")
                         .WithMany("RecipeIngridients")
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mardul.Recipes.Core.Entities.Measure", "Measure")
+                    b.HasOne("Mardul.Recipes.Core.Entities.MeasureEntity", "Measure")
                         .WithMany("RecipeIngridients")
                         .HasForeignKey("MeasureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mardul.Recipes.Core.Entities.Recipe", "Recipe")
+                    b.HasOne("Mardul.Recipes.Core.Entities.RecipeEntity", "Recipe")
                         .WithMany("Ingredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -228,17 +351,47 @@ namespace Mardul.Recipes.Infrastructure.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.Ingredient", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RolePermissionEntity", b =>
+                {
+                    b.HasOne("Mardul.Recipes.Core.Entities.PermissionEntity", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mardul.Recipes.Core.Entities.RoleEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.UserRole", b =>
+                {
+                    b.HasOne("Mardul.Recipes.Core.Entities.RoleEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mardul.Recipes.Core.Entities.UserEntity", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.IngredientEntity", b =>
                 {
                     b.Navigation("RecipeIngridients");
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.Measure", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.MeasureEntity", b =>
                 {
                     b.Navigation("RecipeIngridients");
                 });
 
-            modelBuilder.Entity("Mardul.Recipes.Core.Entities.Recipe", b =>
+            modelBuilder.Entity("Mardul.Recipes.Core.Entities.RecipeEntity", b =>
                 {
                     b.Navigation("Ingredients");
                 });

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mardul.Recipes.Infrastructure.DbContexts.Configurations
 {
-    public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
+    public class RecipeConfiguration : IEntityTypeConfiguration<RecipeEntity>
     {
-        public void Configure(EntityTypeBuilder<Recipe> builder)
+        public void Configure(EntityTypeBuilder<RecipeEntity> builder)
         {
             builder
                 .HasKey(x => x.Id);

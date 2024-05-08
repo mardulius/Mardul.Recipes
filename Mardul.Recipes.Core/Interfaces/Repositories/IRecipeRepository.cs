@@ -3,7 +3,7 @@
 
 namespace Mardul.Recipes.Core.Interfaces.Repositories
 {
-    public interface IRecipeRepository : IGenericRepository<Recipe>
+    public interface IRecipeRepository : IGenericRepository<RecipeEntity>
     {
     }
 }

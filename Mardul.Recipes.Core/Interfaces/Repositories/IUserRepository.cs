@@ -4,9 +4,9 @@ using Mardul.Recipes.Core.Entities;
 
 namespace Mardul.Recipes.Core.Interfaces.Repositories
 {
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IUserRepository : IGenericRepository<UserEntity>
     {
-        Task<User> GetByEmail(string email);
-        Task<User> GetByNickName(string? name);
+        Task<UserEntity> GetByEmail(string email);
+        Task<UserEntity> GetByNickName(string? name);
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mardul.Recipes.Infrastructure.Repositories
 {
-    public class RecipeRepository : GenericRepository<Recipe>, IRecipeRepository
+    public class RecipeRepository : GenericRepository<RecipeEntity>, IRecipeRepository
     {
         public RecipeRepository(DbContext dbContext) : base(dbContext)
         {

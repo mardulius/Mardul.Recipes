@@ -8,7 +8,7 @@ namespace Mardul.Recipes.Core.Services
     {
         public UserMappingProfile() 
         {
-            CreateMap<RegisterRequestDto, User>();
+            CreateMap<RegisterRequestDto, UserEntity>();
         }
     }
 }

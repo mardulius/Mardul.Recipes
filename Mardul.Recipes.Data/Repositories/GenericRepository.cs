@@ -34,7 +34,7 @@ namespace Mardul.Recipes.Infrastructure.Repositories
 
         public async Task Update(T entity)
         {
-            _dbContext.Update(entity);
+            _dbContext.Set<T>().Update(entity);
         }
     }
 

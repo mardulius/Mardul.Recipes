@@ -25,7 +25,7 @@ namespace Mardul.Recipes.Core.Services
 
         public async Task<bool> Add(CreateRecipeDto recipe)
         {
-            var newRecipe = _mapper.Map<Recipe>(recipe);
+            var newRecipe = _mapper.Map<RecipeEntity>(recipe);
             
             await _recipeRepository.Add(newRecipe);
             var saved = await _unitOfWorkService.SaveChangesAsync();

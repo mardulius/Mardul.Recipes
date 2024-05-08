@@ -4,13 +4,18 @@ using Mardul.Recipes.Core.Interfaces.Services;
 using Mardul.Recipes.Core.Services;
 using Mardul.Recipes.Infrastructure.Authentication;
 using Mardul.Recipes.Infrastructure.DbContexts;
+using Mardul.Recipes.Infrastructure.Options;
 using Mardul.Recipes.Infrastructure.Repositories;
 using Mardul.Recipes.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net;
 using System.Text;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Mardul.Recipes.Api.Configuration
 {
@@ -61,11 +66,18 @@ namespace Mardul.Recipes.Api.Configuration
             services.AddAutoMapper(typeof(RecipeMappingProfile));
             services.AddAutoMapper(typeof(UserMappingProfile));
 
-            var section = configuration.GetSection("PasswordHashOptions");
-            services.Configure<PasswordHashOptions>(section);
-
             services.AddCustomServices();
             services.AddRepositories();
+
+            return services;
+        }
+
+        public static IServiceCollection AddConfiguredOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+            services.Configure<PasswordHashOptions>(configuration.GetSection(nameof(PasswordHashOptions)));
+            services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
+
 
             return services;
         }
@@ -73,10 +85,8 @@ namespace Mardul.Recipes.Api.Configuration
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtOptions = new JwtOptions();
-            var section = configuration.GetSection("JwtOptions");
+            var section = configuration.GetSection(nameof(JwtOptions));
             section.Bind(jwtOptions);
-
-            services.Configure<JwtOptions>(section);
 
             services.AddSingleton<ITokenService, TokenService>();
 
@@ -103,9 +113,9 @@ namespace Mardul.Recipes.Api.Configuration
         {
 
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
-            services.AddTransient<IRecipeService, RecipeService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IPasswordHashService, PasswordHashService>();
+            services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPasswordHashService, PasswordHashService>();
 
             return services;
         }

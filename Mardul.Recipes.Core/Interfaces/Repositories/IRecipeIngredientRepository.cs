@@ -3,8 +3,8 @@
 
 namespace Mardul.Recipes.Core.Interfaces.Repositories
 {
-    public interface IRecipeIngredientRepository : IGenericRepository<RecipeIngredient>
+    public interface IRecipeIngredientRepository : IGenericRepository<RecipeIngredientEntity>
     {
-        Task AddRange(IEnumerable<RecipeIngredient> recipeIngredients);
+        Task AddRange(IEnumerable<RecipeIngredientEntity> recipeIngredients);
     }
 }

@@ -4,20 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mardul.Recipes.Infrastructure.Repositories
 {
-    public class UserRepository : GenericRepository<User>, IUserRepository
+    public class UserRepository : GenericRepository<UserEntity>, IUserRepository
     {
         public UserRepository(DbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<User> GetByEmail(string email)
+        public async Task<UserEntity> GetByEmail(string email)
         {
-            return await _dbContext.Set<User>().FirstOrDefaultAsync(x => x.Email == email);
+            return await _dbContext.Set<UserEntity>().FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public async Task<User> GetByNickName(string? name)
+        public async Task<UserEntity> GetByNickName(string? name)
         {
-            return await _dbContext.Set<User>().FirstOrDefaultAsync(x => x.NickName == name);
+            return await _dbContext.Set<UserEntity>().FirstOrDefaultAsync(x => x.NickName == name);
         }
     }
 }
