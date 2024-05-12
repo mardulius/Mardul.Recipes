@@ -1,7 +1,7 @@
 ﻿
 namespace Mardul.Recipes.Infrastructure.Options
 {
-    public class AuthorizationOptions
+    public class AuthorizationAppOptions
     {
         public RolePermissions[] RolePermissions { get; set; } = [];
     }

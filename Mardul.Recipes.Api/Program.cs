@@ -1,4 +1,6 @@
 using Mardul.Recipes.Api.Configuration;
+using Mardul.Recipes.Core.Enums;
+using Mardul.Recipes.Infrastructure.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -10,7 +12,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddConfiguredOptions(configuration);
 builder.Services.AddInfrastructure(configuration);
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("Read", builder => builder
+            .AddRequirements(new PermissionRequirement([Permission.Read])))
+    .AddPolicy("Create", builder => builder
+            .AddRequirements(new PermissionRequirement([Permission.Create])));
 
 builder.Services.AddLogging(o => o.AddFilter("Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler", LogLevel.Debug));
 

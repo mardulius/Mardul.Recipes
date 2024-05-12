@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mardul.Recipes.Infrastructure.DbContexts.Configurations
 {
-    public class RolePermissionConfiguration(AuthorizationOptions _authorizationOptions) : IEntityTypeConfiguration<RolePermissionEntity>
+    public class RolePermissionConfiguration(AuthorizationAppOptions _authorizationOptions) : IEntityTypeConfiguration<RolePermissionEntity>
     {
         public void Configure(EntityTypeBuilder<RolePermissionEntity> builder)
         {

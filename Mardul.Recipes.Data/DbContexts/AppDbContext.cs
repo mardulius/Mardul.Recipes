@@ -9,13 +9,13 @@ namespace Mardul.Recipes.Infrastructure.DbContexts
 {
     public class AppDbContext : DbContext
     {
-        private readonly IOptions<AuthorizationOptions> _authorizationOptions;
+        private readonly IOptions<AuthorizationAppOptions> _authorizationOptions;
 
         public DbSet<RecipeEntity> Recipes { get; set; }
         public DbSet<MeasureEntity> Measures { get; set; }
         public DbSet<IngredientEntity> Ingredients { get; set; }
         public DbSet<UserEntity> Users { get; set; }
-        public AppDbContext(DbContextOptions<AppDbContext> options, IOptions<AuthorizationOptions> authorizationOptions) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IOptions<AuthorizationAppOptions> authorizationOptions) : base(options)
         {
             _authorizationOptions = authorizationOptions;
             Database.EnsureCreated();

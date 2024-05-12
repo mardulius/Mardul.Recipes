@@ -2,6 +2,7 @@
 using Mardul.Recipes.Core.Dto;
 using Mardul.Recipes.Core.Dto.Accounts;
 using Mardul.Recipes.Core.Entities;
+using Mardul.Recipes.Core.Enums;
 using Mardul.Recipes.Core.Interfaces.Repositories;
 using Mardul.Recipes.Core.Interfaces.Services;
 using System.Security.Claims;
@@ -17,17 +18,20 @@ namespace Mardul.Recipes.Core.Services
         private readonly IMapper _mapper;
         private readonly IPasswordHashService _passwordHashService;
         private readonly IUnitOfWorkService _unitOfWorkService;
+        private readonly IRoleRepository _roleRepository;
 
         public UserService(ITokenService tokenService, IUserRepository userRepository, IMapper mapper,
             IPasswordHashService passwordHashService,
-            IUnitOfWorkService unitOfWorkService)
+            IUnitOfWorkService unitOfWorkService, IRoleRepository roleRepository)
         {
             _tokenService = tokenService;
             _userRepository = userRepository;
             _mapper = mapper;
             _passwordHashService = passwordHashService;
             _unitOfWorkService = unitOfWorkService;
+            _roleRepository = roleRepository;
         }
+        #endregion
 
         public async Task<UserEntity> GetByEmail(string email)
         {
@@ -38,8 +42,6 @@ namespace Mardul.Recipes.Core.Services
         {
             return await _userRepository.GetByNickName(name);
         }
-
-        #endregion
 
         public async Task<TokenDto> Login(LoginRequestDto request)
         {
@@ -53,8 +55,9 @@ namespace Mardul.Recipes.Core.Services
                 {
                     var claims = new Claim[]
                     {
-                        new Claim(ClaimTypes.Name, user.Email),
-                        new Claim(ClaimTypes.Email, user.Email)
+                        new("UserId", user.Id.ToString()),
+                        new(ClaimTypes.Name, user.Email),
+                        new(ClaimTypes.Email, user.Email)
                     };
 
                     var token = _tokenService.Generate(claims);
@@ -77,6 +80,9 @@ namespace Mardul.Recipes.Core.Services
             var createUser = _mapper.Map<UserEntity>(request);
 
             createUser.Password = _passwordHashService.Generate(request.Password);
+
+            var role = await _roleRepository.GetById((int)Role.User);
+            createUser.Roles.Add(role);
 
             await _userRepository.Add(createUser);
             await _unitOfWorkService.SaveChangesAsync();

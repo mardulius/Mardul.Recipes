@@ -8,14 +8,11 @@ using Mardul.Recipes.Infrastructure.Options;
 using Mardul.Recipes.Infrastructure.Repositories;
 using Mardul.Recipes.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Net;
 using System.Text;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Mardul.Recipes.Api.Configuration
 {
@@ -116,6 +113,8 @@ namespace Mardul.Recipes.Api.Configuration
             services.AddScoped<IRecipeService, RecipeService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordHashService, PasswordHashService>();
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
             return services;
         }
@@ -124,6 +123,7 @@ namespace Mardul.Recipes.Api.Configuration
             services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             return services;
         }

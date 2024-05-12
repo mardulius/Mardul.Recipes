@@ -1,6 +1,7 @@
 ﻿
 
 using Mardul.Recipes.Core.Entities;
+using Mardul.Recipes.Core.Enums;
 
 namespace Mardul.Recipes.Core.Interfaces.Repositories
 {
@@ -8,5 +9,6 @@ namespace Mardul.Recipes.Core.Interfaces.Repositories
     {
         Task<UserEntity> GetByEmail(string email);
         Task<UserEntity> GetByNickName(string? name);
+        Task<IEnumerable<Permission>> GetPermissionsAsync(int userId);
     }
 }
