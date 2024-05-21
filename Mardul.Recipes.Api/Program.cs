@@ -11,7 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddConfiguredOptions(configuration);
+
 builder.Services.AddInfrastructure(configuration);
+
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("Read", builder => builder
             .AddRequirements(new PermissionRequirement([Permission.Read])))

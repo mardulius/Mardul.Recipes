@@ -51,13 +51,7 @@ namespace Mardul.Recipes.Api.Configuration
 
             services.AddCustomAuthentication(configuration);
 
-            services.AddDbContext<AppDbContext>(x =>
-            {
-                x.UseSqlite(configuration.GetConnectionString("db"));
-                x.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
-                x.UseLazyLoadingProxies();
-
-            });
+            services.AddPostgreSqlDbContext(configuration);
             services.AddScoped<DbContext, AppDbContext>();
 
             services.AddAutoMapper(typeof(RecipeMappingProfile));
@@ -68,6 +62,29 @@ namespace Mardul.Recipes.Api.Configuration
 
             return services;
         }
+
+        public static IServiceCollection AddPostgreSqlDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("postgres")));
+
+            return services;
+        }
+        public static IServiceCollection AddSqlLiteDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<AppDbContext>(x =>
+            {
+                x.UseSqlite(configuration.GetConnectionString("sqllite"));
+                x.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+                x.UseLazyLoadingProxies();
+
+            });
+
+            return services;
+        }
+
+
+
 
         public static IServiceCollection AddConfiguredOptions(this IServiceCollection services, IConfiguration configuration)
         {

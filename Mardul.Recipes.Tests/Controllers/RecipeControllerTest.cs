@@ -9,8 +9,8 @@ namespace Mardul.Recipes.Tests.Controllers
 {
     public class RecipeControllerTest
     {
-        private IRecipeService _recipeService;
-        private RecipeController _recipeController;
+        private readonly IRecipeService _recipeService;
+        private readonly RecipeController _recipeController;
 
         public RecipeControllerTest()
         {

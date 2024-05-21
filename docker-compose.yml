@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  mardul.recipes.api:
+    image: ${DOCKER_REGISTRY-}mardulrecipesapi
+    build:
+      context: .
+      dockerfile: Mardul.Recipes.Api/Dockerfile
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: "recipedb"
+      POSTGRES_USER: "recipeapp"
+      POSTGRES_PASSWORD: "Pgpwd4recipe"
+    ports:
+      - "5432:5432"
