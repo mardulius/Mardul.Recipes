@@ -3,26 +3,11 @@ import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
 import Input from '../../components/Input/Input';
-
-export type LoginForm = {
-	email: {
-		value: string;
-	};
-	password: {
-		value: string;
-	};
-}
+import { sendLogin } from '../../Services/apiService';
+import { LoginForm } from '../../api/Contracts';
 
 
 export function Login(){
-
-	// const navigate = useNavigate();
-
-	// useEffect(() => {
-	// 	if(jwt){
-	// 		navigate('/');
-	// 	}
-	// }, [jwt, navigate]);
 
 	const submit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -54,3 +39,4 @@ export function Login(){
 
 		
 }
+

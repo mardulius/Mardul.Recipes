@@ -19,7 +19,8 @@ namespace Mardul.Recipes.Infrastructure.DbContexts
         {
             _authorizationOptions = authorizationOptions;
             Database.EnsureCreated();
-           
+            Database.Migrate();
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

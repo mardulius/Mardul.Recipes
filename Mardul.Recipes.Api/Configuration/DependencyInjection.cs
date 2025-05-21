@@ -51,7 +51,8 @@ namespace Mardul.Recipes.Api.Configuration
 
             services.AddCustomAuthentication(configuration);
 
-            services.AddPostgreSqlDbContext(configuration);
+            //services.AddPostgreSqlDbContext(configuration);
+            services.AddSqlLiteDbContext(configuration);
             services.AddScoped<DbContext, AppDbContext>();
 
             services.AddAutoMapper(typeof(RecipeMappingProfile));
